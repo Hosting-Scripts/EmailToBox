@@ -1,0 +1,24 @@
+<?php include('header.phtml'); ?>
+<div class="center">
+	
+	<div id="signup-steps">
+		<nav class="step-2"></nav>
+		<ul>
+			<li >Connect <span>Box Account</span></li>
+			<li class="active">Connect <span>Email Account</span></li>
+			<li>Start Saving <span>Attachments</span></li>
+		</ul>
+	</div>
+	
+	<hr />
+	
+	<header>
+		<h1>Connect Your Email Account</h1>
+		<h3>Enter the email you'd like to connect to EmailToBox</h3>
+	</header>
+	<form method="post" action="/signup/contextio">
+		<input id="email" type="text" name="mailbox_email" value="<?php echo $templateVars['defaultEmail']; ?>" />
+		<input type="submit" value="Connect" />
+	</form>
+</div>
+<?php include('footer.phtml'); ?>

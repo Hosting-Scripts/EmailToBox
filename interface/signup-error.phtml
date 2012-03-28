@@ -1,0 +1,27 @@
+<?php include('header.phtml'); ?>
+<?php  if (!isset($bodyVars) || !is_array($bodyVars)) $bodyVars = array(); ?>
+<div class="center">
+	
+	<div id="signup-steps">
+		<nav class="no-step"></nav>
+		<ul>
+			<li>Connect <span>Box Account</span></li>
+			<li>Connect <span>Email Account</span></li>
+			<li>Start Saving <span>Attachments</span></li>
+		</ul>
+	</div>
+	
+	<hr />
+	
+	<header class="error">
+		<h1>Something's wrong</h1>
+		<h3><?php echo $bodyVars['errorMessage']; ?></h3>
+	</header>
+
+<?php 
+if (array_key_exists('linkTo', $bodyVars)) { 
+	echo '	<div><a href="'.$bodyVars['linkTo']['href'].'" class="button">'.$bodyVars['linkTo']['label'].'</a></div>';
+} 
+?>
+</div>
+<?php include('footer.phtml'); ?>

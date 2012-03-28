@@ -1,0 +1,134 @@
+<?php include('header.phtml'); ?>
+<?php  if (!isset($bodyVars) || !is_array($bodyVars)) $bodyVars = array(); ?>
+<div id="account-settings">
+	
+	<div class="header">
+		<div class="selected-folder-pair">
+			<ul class="body clearfix settings-opened">
+				<li class="email-folder" id="fp-email">
+					<div class="icon"></div>
+					<h3 class="folder-name"></h3>
+					<h4 class="folder-email"></h4>
+				</li>
+				<!-- <li >
+				</li> -->
+				<li class="box-folder" id="fp-box">
+					<div class="arrow"></div>
+					<div class="icon"></div>
+					<h3 class="folder-name"></h3>
+				</li>
+			</ul>
+			<nav id="fp-actions">
+				<ul>
+<?php /*
+					<li class="delete">
+						<a href=""><span class="icon"></span>Delete This Pair</a>
+					</li>
+*/ ?>
+					<li class="pause">
+						<a href="javascript:void(null);" id="fp-actions-pause"><span class="icon"></span>Pause Transfers</a>
+					</li>
+					<li class="resume">
+						<a href="javascript:void(null);" id="fp-actions-resume"><span class="icon"></span>Resume Transfers</a>
+					</li>
+<?php /*
+					<li class="track"><a><input id="track-thread" name="" type="checkbox" /><label for="track-thread">Track Thread</label></a></li> 
+*/ ?>
+				</ul>
+			</nav>
+		</div>
+		
+<?php /*
+		<button id="settings-toggle" class="fp-settings button no-shadow"><span class="icon"></span>Edit</button>
+*/ ?>
+	</div>
+	
+<?php /*
+	<div id="folder-pair-list">
+		<div class="divider"></div>
+		<div class="content">
+		<?php for ($k = 0; $k <= 5; $k ++) : ?>
+			<div class="folder-pair">
+				<ul>
+					<li class="email-folder">
+						<h4>Box Folder</h4>
+						<h5>you@example.com</h5>
+					</li>
+					<li class="box-folder">
+						<div class="arrow"></div>
+						<h4>Attachments</h4>
+					</li>
+				</ul>
+			</div>
+		<?php endfor; ?>
+		</div>
+		<button>+ Add Another Folder Pair</button>
+	</div>
+*/ ?>
+	
+	<div class="divider"></div>
+	
+	<div id="saved-attachments" class="empty">
+		<p class="empty">Drop messages in the <span class="email folder-name"></span> folder in your email account to import them in the <span class="box folder-name"></span> folder in your Box account.</p>
+		<div id="history-list">
+		</div>
+		<button href="" id="history-paging" class="paging" style="display: none;">show older entries</button>
+	</div>
+
+	<script id="tmpl-attachment-article" type="text/x-jquery-tmpl">
+		<article class="attachment {{#if success==false}}error{{/if}}">
+			<ul>
+				<li class="icon">
+					<div class="imgCtnr {{=type}}"></div>
+				</li>
+				<li class="file-info">
+				{{#if type == 'comment'}}
+					<p class="no-attachments">- message with no attachments -</p>
+				{{else}}
+					<h3>{{=fileInfo.contextio.file_name}}</h3>
+				{{/if}}
+					<span class="date">{{=$ctx.formatTime(time)}}</span><span class="size">{{=$ctx.formatBytes(fileInfo.contextio.size)}}</span>
+				</li>
+				<li class="email-info">
+					<ul>
+						<li><span class="field-value strong">{{=fileInfo.contextio.subject}}</span></li>
+						<li><span class="field-label">from</span><span class="field-value">{{=$ctx.sender(fileInfo.contextio.sender)}}</span></li>
+					</ul>
+				</li>
+			{{#if success==false}}
+				<li class="sync-error">
+					<ul>
+						<li class="alert"><span class="icon" data-tooltip="This file did not sync properly"></span></li>
+						<li><a class="button retry-button no-shadow">Retry</a></li>
+						
+					</ul>
+				</li>
+			{{else}}
+				<li class="box-info">
+				{{#if type == 'file'}}
+					<span>Imported in Box as a new file.</span>
+				{{else type == 'rev'}}
+					<span>Imported in Box as a new version of: <span class="file-name">{{=fileInfo.box.file_name}}</span></span>
+				{{else}}
+					<span>Added as a comment in Box on files: {{#each fileInfo.boxFiles}}<span class="file-name">{{=file_name}}</span>{{/each}}</span>
+				{{/if}}
+				</li>
+			{{/if}}
+			</ul>
+		</article>
+	</script>
+</div>
+<?php  
+if (array_key_exists('dataTransfer', $bodyVars) && $bodyVars['dataTransfer']['quota'] >= 0) { 
+	$usage = formatByteSize($bodyVars['dataTransfer']['usage']['used']);
+	$quota = formatByteSize($bodyVars['dataTransfer']['quota']);
+	$resetDate = date("M n, Y", ($bodyVars['dataTransfer']['usage']['until']));
+	?>
+	<div id="transfer-quota">
+		<p>Current monthly data transfer usage: <span class="monthly-usage"><?php echo $usage['str']; ?></span> of <span class="monthly-quota"><?php echo $quota['str']; ?></span>. Next reset on <span class="reset-date"><?php echo $resetDate; ?></span></p>
+	</div>
+	<?php 
+} 
+?>
+
+<?php include('footer.phtml'); ?>

@@ -1,0 +1,56 @@
+<?php  if (!isset($headerVars) || !is_array($headerVars)) $headerVars = array(); ?><!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1;IE=Edge" />
+	<meta charset="utf-8" />
+	
+	<title>EmailToBox | Drag and Drop Email to Box Integration</title>
+	
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Cabin:400,700" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/<?php echo LIBRARY_VERSION_JQUERY; ?>/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/<?php echo LIBRARY_VERSION_JQUERYUI; ?>/jquery-ui.min.js"></script>
+<?php
+	foreach ($includeJS as $script) {
+		echo '	<script type="text/javascript" src="/js/'.$script.'"></script>'."\n";
+	}
+?>
+
+	<script type="text/javascript">
+
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-6490317-4']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+
+	</script>	
+</head>
+<body>
+	<header id="header">
+		<div class="wrap">
+			<?php INTERFACE_HOME; ?>
+			<h1><a href="/">EmailToBox</a></h1>
+			<nav>
+				<ul>
+<?php if (array_key_exists('showLogout', $headerVars) && $headerVars['showLogout']) { ?>
+					<li><a href="/logout" class="white-button no-shadow"><span class="icon"></span>Logout</a></li>
+<?php } else { ?>
+					<li><a href="/login" class="button no-shadow"><span class="icon"></span>Login</a></li>
+<?php } ?>
+				</ul>
+			</nav>
+		</div>
+		<div class="clear"></div>
+	</header>
+	
+	<div id="main">
+		<div class="wrap">

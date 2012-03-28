@@ -1,0 +1,31 @@
+<?php include('header.phtml'); ?>
+<div class="center">
+	
+	<div id="signup-steps">
+		<nav class="step-3"></nav>
+		<ul>
+			<li >Connect <span>Box Account</span></li>
+			<li>Connect <span>Email Account</span></li>
+			<li class="active">Start Saving <span>Attachments</span></li>
+		</ul>
+	</div>
+	
+	<hr />
+	
+	<header>
+		<h1>Success!</h1>
+		<h3>You have now connected your mailbox to your Box account.</h3>
+		<h3>To get started, simply drag email with attachments into the newly created <mark>EmailToBox</mark> folder.</h3>
+	</header>
+	
+	<figure id="drag-graphic">
+		<ul>
+			<li>Drag one of these emails</li>
+			<li>To this folder</li>
+		</ul>
+		<img src="/images/success-graphic.png" width="645" height="245" alt="Success Graphic">
+	</figure>
+
+	<div id="app"><a href="/app" class="button">Ok!</a></div>
+</div>
+<?php include('footer.phtml'); ?>
